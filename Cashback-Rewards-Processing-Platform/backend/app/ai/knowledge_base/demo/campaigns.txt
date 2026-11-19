@@ -1,0 +1,37 @@
+# Campaigns — BigCity Promotions
+
+Document: campaigns.txt
+Audience: CAMPAIGN_OPERATIONS, SUPPORT
+Purpose: Active campaign rules and eligibility
+
+## Festival Bonanza Campaign
+
+- Customers earn an additional 5% cashback during the Festival Bonanza campaign period.
+- Festival Bonanza bonus is in addition to base tier cashback when the purchase is eligible.
+- Maximum Festival Bonanza campaign cashback is ₹1000 per customer per month.
+- Eligible transactions must be settled successfully.
+- Refunded or cancelled transactions are NOT eligible for Festival Bonanza cashback.
+- Festival Bonanza bonus cashback is credited within 72 hours after transaction settlement.
+
+Example eligibility check:
+- Question: Is a refunded transaction eligible for Festival Bonanza cashback?
+- Answer: No. Refunded or cancelled transactions are not eligible for Festival Bonanza cashback.
+
+## New User Welcome Campaign
+
+- New customers receive ₹200 welcome rewards after their first successful purchase.
+- The first purchase must settle successfully.
+- If the first purchase is refunded or cancelled, the welcome reward is not credited.
+
+## Referral Campaign
+
+- Customers receive ₹100 for each successful referral.
+- The referred user must complete at least one eligible transaction.
+- Eligible means settled, not refunded, and not cancelled.
+- Referral reward is not paid if the referred user’s transaction fails eligibility checks.
+
+## Campaign vs base policy
+
+- Base tier cashback rules live in rewards_policy.txt (including the ₹500 per-transaction maximum for base cashback).
+- Campaign bonuses may have their own monthly caps and credit windows (for example Festival Bonanza: ₹1000/month, 72-hour credit).
+- When base policy and campaign timing differ, report both and apply the rule that matches the reward type (base vs campaign bonus).

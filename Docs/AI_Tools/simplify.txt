@@ -1,0 +1,187 @@
+Simplify Jobs is one of the best free platforms to add to your job search stack. It helps with:
+
+AI-powered job matching
+Auto-filling applications
+Resume tailoring for each job
+Application tracking
+Discovering startup and product-company jobs that may not appear on LinkedIn feeds
+How I would use Simplify if I were in your position
+Step 1: Create a Strong Profile
+
+Fill in:
+
+Python
+FastAPI
+Django
+PostgreSQL
+MySQL
+Docker
+AWS
+Redis
+RabbitMQ
+GitHub Actions
+REST APIs
+AI Integration (OpenAI/Gemini)
+
+Upload your latest resume and complete every profile section. Simplify uses this information to match jobs.
+
+Step 2: Set Filters
+
+Target:
+
+Backend Engineer
+Python Developer
+Software Engineer
+Platform Engineer
+AI Engineer (Junior)
+Cloud Engineer (Junior)
+
+Experience:
+
+1–3 years
+
+Locations:
+
+Bengaluru
+Remote India
+Hybrid
+Step 3: Install the Chrome Extension
+
+The Simplify Copilot extension can autofill many application forms and save significant time during mass applications.
+
+Step 4: Application Targets
+
+Apply daily:
+
+10–15 highly relevant jobs
+5 stretch opportunities
+5 remote opportunities
+
+Target 20–25 applications/day.
+
+Step 5: Track Everything
+
+Use Simplify's tracker instead of spreadsheets. Track:
+
+Applied
+OA received
+Interview scheduled
+Rejected
+Offer received
+My recommendation for your situation
+
+Don't rely on Simplify alone.
+
+Use this combination:
+
+LinkedIn Jobs
+Simplify Jobs
+Wellfound (Startups)
+Instahyre
+Company career pages directly
+
+This combination typically generates far more interview calls than using LinkedIn alone.
+
+For someone with your stack and experience level, I would focus heavily on:
+
+Bengaluru product companies
+SaaS startups
+AI startups
+FinTech companies
+Cloud-native companies
+
+These are the employers most likely to value your Python + Backend + Cloud combination and pay above 8 LPA.
+
+
+
+Instructions for roles with stack:
+
+1. Prioritize all high-impact backend skills across Experience, Projects, Skills, and Resume sections:
+   - Python
+   - FastAPI
+   - Django
+   - REST APIs
+   - PostgreSQL
+   - MySQL
+   - Redis
+   - RabbitMQ
+   - Docker
+   - AWS
+   - Git
+   - GitHub Actions
+   - CI/CD
+   - Linux
+   - OpenAI API
+   - Gemini API
+
+2. Ensure every project includes:
+   - Problem statement
+   - Technologies used
+   - Key features implemented
+   - Scalability or performance improvements
+   - Deployment details
+   - Quantifiable achievements where possible
+
+3. Emphasize backend engineering work over frontend work.
+
+4. Extract and highlight all cloud-related experience, including:
+   - AWS services
+   - Docker containers
+   - Deployment processes
+   - CI/CD pipelines
+   - Infrastructure knowledge
+
+5. Include all API development experience:
+   - REST API design
+   - Authentication
+   - Authorization
+   - Database integration
+   - Error handling
+   - Async processing
+
+6. Highlight AI-related experience:
+   - OpenAI integrations
+   - Gemini integrations
+   - Prompt engineering
+   - AI-powered automation
+   - LLM applications
+
+7. Use strong action verbs:
+   - Developed
+   - Designed
+   - Implemented
+   - Optimized
+   - Automated
+   - Integrated
+   - Deployed
+   - Scaled
+
+8. Add measurable impact whenever possible:
+   - Reduced response time
+   - Improved performance
+   - Increased throughput
+   - Automated manual processes
+   - Reduced operational effort
+
+9. Tailor resumes for:
+   - Python Developer
+   - Backend Engineer
+   - Software Engineer
+   - Cloud Engineer
+   - AI Engineer (Junior)
+   - Platform Engineer
+
+10. Prioritize keywords commonly found in ATS systems for Python backend roles.
+
+11. Avoid generic descriptions and focus on technical implementation details.
+
+12. Ensure all experience and projects demonstrate production-ready engineering practices.
+
+13. Prefer backend, cloud, distributed systems, and AI experience over unrelated technologies.
+
+14. Surface transferable skills from all roles, including problem-solving, debugging, system design, and deployment experience.
+
+15. Keep generated resumes concise, achievement-focused, and optimized for 1–3 years experienced software engineering positions.
+
+
+Highlight experience in Python, FastAPI, Django, PostgreSQL, Docker, AWS, Redis, RabbitMQ, GitHub Actions, REST APIs, AI integrations, web scraping, automation, and backend system development. Prioritize these technologies whenever they appear in projects or work experience. Emphasize scalable backend systems, API development, cloud deployment, asynchronous processing, and AI-powered applications.

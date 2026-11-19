@@ -1,0 +1,711 @@
+# RabbitMQ & Redis Interview Quick Revision Sheet
+
+# RabbitMQ
+
+## What is RabbitMQ?
+
+RabbitMQ is a message broker used for asynchronous processing.
+
+It helps move long-running tasks from APIs to background workers so that users get faster responses.
+
+---
+
+## Why Use RabbitMQ?
+
+Without RabbitMQ:
+
+```text
+User Request
+↓
+API
+↓
+Process 5 Lakh Records
+↓
+Wait 5 Minutes
+↓
+Response
+```
+
+Problems:
+
+* Slow response
+* Request timeout
+* Poor user experience
+
+---
+
+With RabbitMQ:
+
+```text
+User Request
+↓
+API
+↓
+Create Job
+↓
+Push To Queue
+↓
+Return Job ID
+```
+
+Worker:
+
+```text
+RabbitMQ Queue
+↓
+Worker
+↓
+Process Data
+↓
+Update Status
+```
+
+Result:
+
+* Fast API response
+* Background processing
+* Better scalability
+
+---
+
+## Components
+
+### Producer
+
+Creates messages.
+
+Example:
+
+```text
+FastAPI
+↓
+Push Job To Queue
+```
+
+---
+
+### Queue
+
+Stores messages temporarily.
+
+Example:
+
+```text
+Import Queue
+QR Queue
+Email Queue
+```
+
+---
+
+### Consumer / Worker
+
+Reads messages and executes tasks.
+
+Example:
+
+```text
+Worker
+↓
+Read Queue
+↓
+Process Records
+```
+
+---
+
+## Example From Your Experience
+
+### Large CSV Import
+
+```text
+Upload CSV
+↓
+API Validation
+↓
+Create Job ID
+↓
+Push To RabbitMQ
+↓
+Return Response
+```
+
+Worker:
+
+```text
+Worker Picks Job
+↓
+Read CSV
+↓
+Insert Data
+↓
+Update Status
+```
+
+---
+
+### Bulk QR Generation
+
+```text
+Admin Requests 1 Lakh QR Codes
+↓
+API Creates Job
+↓
+RabbitMQ Queue
+↓
+Worker Generates QR Codes
+↓
+Store Results
+```
+
+---
+
+## Priority Queue
+
+RabbitMQ can process higher-priority jobs first.
+
+Example:
+
+```text
+Job A - Priority 10
+Job B - Priority 5
+```
+
+RabbitMQ:
+
+```text
+Process Job A First
+```
+
+---
+
+## Advantages
+
+* Asynchronous Processing
+* Scalability
+* Retry Mechanism
+* Better User Experience
+* Decoupled Services
+
+---
+
+## Interview Answer
+
+We used RabbitMQ for long-running operations such as bulk data imports and QR generation. The API performs initial validation, creates a job, and pushes it to RabbitMQ. Background workers consume the queue and execute the task asynchronously, allowing the API to respond immediately.
+
+---
+
+# Redis
+
+## What is Redis?
+
+Redis is an in-memory key-value data store.
+
+It stores data in RAM, making it much faster than a traditional database.
+
+---
+
+## Why Use Redis?
+
+Without Redis:
+
+```text
+API
+↓
+Database Query
+↓
+Database Query
+↓
+Database Query
+```
+
+Database becomes overloaded.
+
+---
+
+With Redis:
+
+```text
+API
+↓
+Redis Cache
+↓
+Return Data
+```
+
+Database load reduces.
+
+---
+
+## Key-Value Structure
+
+Example:
+
+```text
+job_1001
+↓
+{
+   status: "Processing",
+   progress: 50
+}
+```
+
+Key:
+
+```text
+job_1001
+```
+
+Value:
+
+```json
+{
+  "status":"Processing",
+  "progress":50
+}
+```
+
+---
+
+## Example From Your Experience
+
+### Queue Job Status Tracking
+
+API:
+
+```text
+Create Job
+↓
+Push To RabbitMQ
+↓
+Store Status In Redis
+```
+
+Redis:
+
+```text
+job_1001
+↓
+Processing
+```
+
+Worker:
+
+```text
+Updates Redis
+↓
+Completed
+```
+
+UI:
+
+```text
+Status API
+↓
+Reads Redis
+↓
+Displays Progress
+```
+
+---
+
+## Cache Example
+
+Without Redis:
+
+```text
+API
+↓
+PostgreSQL
+↓
+Response
+```
+
+Every request hits DB.
+
+---
+
+With Redis:
+
+```text
+API
+↓
+Redis
+↓
+Response
+```
+
+If data missing:
+
+```text
+Redis Miss
+↓
+PostgreSQL
+↓
+Store In Redis
+↓
+Return Response
+```
+
+---
+
+## Advantages
+
+* Extremely Fast
+* In-Memory Storage
+* Reduced Database Load
+* Supports Expiry (TTL)
+* Useful For Caching
+* Useful For Session Storage
+* Useful For Queue Status Tracking
+
+---
+
+## Redis vs Database
+
+| Feature     | Redis                       | PostgreSQL    |
+| ----------- | --------------------------- | ------------- |
+| Storage     | RAM                         | Disk          |
+| Speed       | Very Fast                   | Slower        |
+| Cost        | Higher                      | Lower         |
+| Persistence | Optional                    | Permanent     |
+| Use Case    | Cache, Sessions, Job Status | Business Data |
+
+---
+
+# RabbitMQ vs Redis
+
+| Feature           | RabbitMQ         | Redis             |
+| ----------------- | ---------------- | ----------------- |
+| Purpose           | Queue Processing | Caching / Storage |
+| Stores            | Messages         | Data              |
+| Usage             | Background Jobs  | Fast Retrieval    |
+| Example           | CSV Import       | Job Status        |
+| Consumer Required | Yes              | No                |
+
+---
+
+# Combined Architecture
+
+```text
+CSV Upload
+↓
+FastAPI
+↓
+RabbitMQ Queue
+↓
+Worker
+↓
+Database
+
+Job Status
+↓
+Redis
+↓
+Status API
+↓
+Frontend
+```
+
+---
+
+# Interview One-Liners
+
+### RabbitMQ
+
+RabbitMQ is a message broker used for asynchronous task processing. We used it for bulk imports and QR generation jobs to prevent long-running operations from blocking API responses.
+
+### Redis
+
+Redis is an in-memory key-value store used for caching and fast data retrieval. We used it to store and retrieve RabbitMQ job statuses so that users could track progress without repeatedly querying the database.
+
+
+
+# RabbitMQ Configuration (Python)
+
+## Install
+
+```bash
+pip install pika
+```
+
+---
+
+## Connection Configuration
+
+```python
+import pika
+
+connection = pika.BlockingConnection(
+    pika.ConnectionParameters(
+        host="localhost",
+        port=5672
+    )
+)
+
+channel = connection.channel()
+```
+
+---
+
+## Create Queue
+
+```python
+channel.queue_declare(
+    queue="csv_import_queue",
+    durable=True
+)
+```
+
+---
+
+## Producer (Push Message)
+
+```python
+channel.basic_publish(
+    exchange='',
+    routing_key='csv_import_queue',
+    body='job_1001'
+)
+
+print("Job Added To Queue")
+```
+
+---
+
+## Consumer (Worker)
+
+```python
+def callback(ch, method, properties, body):
+    print(f"Processing {body}")
+
+channel.basic_consume(
+    queue='csv_import_queue',
+    on_message_callback=callback,
+    auto_ack=True
+)
+
+channel.start_consuming()
+```
+
+---
+
+## Real Project Flow
+
+```text
+FastAPI API
+↓
+RabbitMQ Queue
+↓
+Worker
+↓
+Database
+```
+
+---
+
+# Redis Configuration (Python)
+
+## Install
+
+```bash
+pip install redis
+```
+
+---
+
+## Connection Configuration
+
+```python
+import redis
+
+redis_client = redis.Redis(
+    host='localhost',
+    port=6379,
+    db=0,
+    decode_responses=True
+)
+```
+
+---
+
+## Store Data
+
+```python
+redis_client.set(
+    "job_1001",
+    "Processing"
+)
+```
+
+---
+
+## Read Data
+
+```python
+status = redis_client.get(
+    "job_1001"
+)
+
+print(status)
+```
+
+---
+
+## Update Data
+
+```python
+redis_client.set(
+    "job_1001",
+    "Completed"
+)
+```
+
+---
+
+## Expiry (TTL)
+
+```python
+redis_client.setex(
+    "job_1001",
+    3600,
+    "Completed"
+)
+```
+
+3600 seconds = 1 hour
+
+After that Redis automatically removes it.
+
+---
+
+# Job Status Example
+
+## API
+
+```python
+job_id = "job_1001"
+
+redis_client.set(
+    job_id,
+    "Processing"
+)
+```
+
+---
+
+## Worker
+
+```python
+redis_client.set(
+    job_id,
+    "Completed"
+)
+```
+
+---
+
+## Status API
+
+```python
+status = redis_client.get(
+    job_id
+)
+
+return {
+    "job_id": job_id,
+    "status": status
+}
+```
+
+---
+
+# Production Configuration Examples
+
+## RabbitMQ
+
+```python
+RABBITMQ_HOST = "rabbitmq-server"
+RABBITMQ_PORT = 5672
+RABBITMQ_USER = "admin"
+RABBITMQ_PASSWORD = "password"
+```
+
+---
+
+## Redis
+
+```python
+REDIS_HOST = "redis-server"
+REDIS_PORT = 6379
+REDIS_DB = 0
+```
+
+---
+
+# FastAPI Integration Example
+
+```python
+@app.post("/import")
+def import_csv():
+
+    job_id = generate_job_id()
+
+    redis_client.set(
+        job_id,
+        "Queued"
+    )
+
+    channel.basic_publish(
+        exchange='',
+        routing_key='csv_import_queue',
+        body=job_id
+    )
+
+    return {
+        "job_id": job_id,
+        "status": "Queued"
+    }
+```
+
+Flow:
+
+```text
+Upload CSV
+↓
+FastAPI
+↓
+Redis (Queued)
+↓
+RabbitMQ
+↓
+Worker
+↓
+Redis (Completed)
+↓
+Status API
+```
+
+# Interview One-Liner
+
+RabbitMQ is configured using a connection, channel, and queue. APIs publish messages to queues, and workers consume them asynchronously.
+
+Redis is configured using a Redis client connection and is commonly used for caching, session storage, and tracking background job status because of its in-memory speed.
+
+
+RabbitMQ
+
+Connection
+↓
+Channel
+↓
+Queue
+
+
+Redis
+
+Connection
+↓
+SET(key, value)
+↓
+GET(key)

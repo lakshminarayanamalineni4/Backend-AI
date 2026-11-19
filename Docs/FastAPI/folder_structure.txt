@@ -1,0 +1,462 @@
+# FastAPI Project Structure (Controller → Service → Repository Pattern)
+
+This is very similar to the Controller-Service-Repository structure you mentioned from Yii.
+
+```text
+app/
+│
+├── main.py
+│
+├── database/
+│   └── database.py
+│
+├── models/
+│   └── user_model.py
+│
+├── schemas/
+│   └── user_schema.py
+│
+├── repositories/
+│   └── user_repository.py
+│
+├── services/
+│   └── user_service.py
+│
+├── controllers/
+│   └── user_controller.py
+│
+├── routes/
+│   └── user_routes.py
+│
+├── middleware/
+│   └── auth_middleware.py
+│
+├── utils/
+│   └── jwt_helper.py
+│
+└── config/
+    └── settings.py
+```
+
+---
+
+# Request Flow
+
+```text
+Client
+↓
+Route
+↓
+Controller
+↓
+Service
+↓
+Repository
+↓
+Database
+```
+
+Response:
+
+```text
+Database
+↓
+Repository
+↓
+Service
+↓
+Controller
+↓
+Client
+```
+
+---
+
+# 1. Database Connection
+
+## database/database.py
+
+```python
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+DATABASE_URL = (
+    "postgresql://user:password@localhost:5432/mydb"
+)
+
+engine = create_engine(DATABASE_URL)
+
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
+
+def get_db():
+    db = SessionLocal()
+
+    try:
+        yield db
+
+    finally:
+        db.close()
+```
+
+---
+
+# 2. SQLAlchemy Model
+
+## models/user_model.py
+
+```python
+from sqlalchemy import Column
+from sqlalchemy import Integer
+from sqlalchemy import String
+
+from database.database import Base
+
+class User(Base):
+
+    __tablename__ = "users"
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    name = Column(String)
+
+    email = Column(
+        String,
+        unique=True
+    )
+
+    password = Column(String)
+```
+
+Purpose:
+
+```text
+Database Table Mapping
+```
+
+Equivalent:
+
+```sql
+CREATE TABLE users (...)
+```
+
+---
+
+# 3. Pydantic Schemas
+
+## schemas/user_schema.py
+
+### Request Schema
+
+```python
+from pydantic import BaseModel
+from pydantic import EmailStr
+
+class UserCreate(BaseModel):
+
+    name: str
+    email: EmailStr
+    password: str
+```
+
+### Response Schema
+
+```python
+class UserResponse(BaseModel):
+
+    id: int
+    name: str
+    email: EmailStr
+```
+
+Purpose:
+
+```text
+API Request Validation
+API Response Validation
+```
+
+---
+
+# 4. Repository Layer
+
+## repositories/user_repository.py
+
+Purpose:
+
+```text
+Database Queries Only
+```
+
+```python
+from models.user_model import User
+
+class UserRepository:
+
+    def get_user_by_email(
+        self,
+        db,
+        email
+    ):
+        return (
+            db.query(User)
+            .filter(
+                User.email == email
+            )
+            .first()
+        )
+
+    def create_user(
+        self,
+        db,
+        user
+    ):
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+
+        return user
+```
+
+Think:
+
+```text
+Repository = SQL Layer
+```
+
+---
+
+# 5. Service Layer
+
+## services/user_service.py
+
+Purpose:
+
+```text
+Business Logic
+```
+
+```python
+from repositories.user_repository import UserRepository
+
+repo = UserRepository()
+
+class UserService:
+
+    def register_user(
+        self,
+        db,
+        user_data
+    ):
+
+        existing_user = (
+            repo.get_user_by_email(
+                db,
+                user_data.email
+            )
+        )
+
+        if existing_user:
+            raise Exception(
+                "Email Already Exists"
+            )
+
+        return repo.create_user(
+            db,
+            user_data
+        )
+```
+
+Think:
+
+```text
+Service
+=
+Business Rules
+```
+
+Examples:
+
+* Login Logic
+* Cashback Logic
+* Reward Calculations
+* Validation Rules
+
+---
+
+# 6. Controller Layer
+
+## controllers/user_controller.py
+
+Purpose:
+
+```text
+Handle Request & Response
+```
+
+```python
+from services.user_service import UserService
+
+service = UserService()
+
+class UserController:
+
+    def register(
+        self,
+        db,
+        user
+    ):
+
+        return service.register_user(
+            db,
+            user
+        )
+```
+
+Think:
+
+```text
+Controller
+=
+Calls Service
+Returns Response
+```
+
+---
+
+# 7. Routes
+
+## routes/user_routes.py
+
+```python
+from fastapi import APIRouter
+from fastapi import Depends
+
+router = APIRouter()
+
+@router.post("/register")
+def register_user(
+    user: UserCreate,
+    db=Depends(get_db)
+):
+    return controller.register(
+        db,
+        user
+    )
+```
+
+Purpose:
+
+```text
+URL Mapping
+```
+
+Equivalent Yii:
+
+```php
+/actionRegister
+```
+
+---
+
+# 8. Main File
+
+## main.py
+
+```python
+from fastapi import FastAPI
+
+from routes.user_routes import router
+
+app = FastAPI()
+
+app.include_router(
+    router,
+    prefix="/users",
+    tags=["Users"]
+)
+```
+
+Run:
+
+```bash
+uvicorn main:app --reload
+```
+
+---
+
+# Complete Registration Flow
+
+```text
+POST /users/register
+↓
+Route
+↓
+Controller
+↓
+Service
+↓
+Repository
+↓
+Database
+```
+
+---
+
+# Login Flow Example
+
+```text
+POST /login
+↓
+Route
+↓
+Controller
+↓
+Service
+      ↓
+      Validate Email
+      ↓
+      Verify Password
+      ↓
+      Generate JWT
+↓
+Repository
+      ↓
+      Fetch User
+↓
+Database
+```
+
+---
+
+# Mapping To Yii
+
+| Yii          | FastAPI            |
+| ------------ | ------------------ |
+| Controller   | Controller         |
+| Service      | Service            |
+| Repository   | Repository         |
+| Model        | SQLAlchemy Model   |
+| Form Model   | Pydantic Schema    |
+| Route        | APIRouter          |
+| DB Component | SQLAlchemy Session |
+| Middleware   | FastAPI Middleware |
+
+---
+
+# Interview Answer
+
+If asked:
+
+"How would you structure a FastAPI project?"
+
+Answer:
+
+> I prefer a layered architecture with Routes, Controllers, Services, Repositories, Schemas, and Models. Routes handle URL mapping, Controllers manage request and response handling, Services contain business logic, Repositories handle database operations, Pydantic Schemas are used for validation, and SQLAlchemy Models represent database tables. This separation improves maintainability, testing, and scalability.

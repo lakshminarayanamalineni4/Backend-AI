@@ -1,0 +1,406 @@
+# AWS Interview Questions & Answers (Backend Developer)
+
+## 1. What is AWS?
+
+### Answer
+
+AWS (Amazon Web Services) is a cloud platform that provides computing resources such as servers, databases, storage, networking, and security services on demand.
+
+Instead of purchasing and maintaining physical servers, companies can rent resources from AWS and pay only for what they use.
+
+### Example
+
+```text
+Traditional Setup
+↓
+Buy Server
+↓
+Install OS
+↓
+Install Database
+↓
+Maintain Hardware
+
+AWS Setup
+↓
+Create AWS Resources
+↓
+Deploy Application
+↓
+Pay For Usage
+```
+
+---
+
+# 2. What is EC2?
+
+### Answer
+
+EC2 (Elastic Compute Cloud) is a virtual server provided by AWS where applications can be deployed and run.
+
+Think of EC2 as a remote computer running on the internet.
+
+### Example
+
+```text
+FastAPI Application
+↓
+Deploy To EC2
+↓
+Users Access Through Internet
+```
+
+### Interview One-Liner
+
+EC2 is used to host backend applications and services without maintaining physical servers.
+
+---
+
+# 3. How Do You Connect To EC2?
+
+### Answer
+
+AWS provides a key pair (.pem file) while creating the EC2 instance.
+
+We use SSH to connect to the server.
+
+### Example
+
+```bash
+ssh -i backend.pem ubuntu@13.234.xx.xx
+```
+
+### Flow
+
+```text
+Developer
+↓
+SSH
+↓
+EC2 Server
+↓
+Execute Commands
+```
+
+---
+
+# 4. How Would You Deploy A FastAPI Application On EC2?
+
+### Answer
+
+1. Push code to GitHub.
+2. Connect to EC2 using SSH.
+3. Clone or pull latest code.
+4. Install dependencies.
+5. Configure environment variables.
+6. Start FastAPI using Uvicorn or Gunicorn.
+7. Configure Nginx if required.
+
+### Flow
+
+```text
+Local Development
+↓
+GitHub
+↓
+SSH To EC2
+↓
+git pull
+↓
+pip install -r requirements.txt
+↓
+uvicorn main:app
+↓
+Application Running
+```
+
+### Interview Answer
+
+After development is completed, the code is pushed to GitHub. The EC2 server pulls the latest code, installs dependencies, and runs the FastAPI application. Nginx can be used as a reverse proxy to handle incoming traffic.
+
+---
+
+# 5. What Is S3?
+
+### Answer
+
+S3 (Simple Storage Service) is AWS object storage used for storing files.
+
+### Common Use Cases
+
+* Images
+* CSV files
+* Excel files
+* Reports
+* Documents
+* Backups
+
+### Example
+
+```text
+User Uploads CSV
+↓
+Store In S3
+↓
+RabbitMQ Worker Processes File
+```
+
+### Interview One-Liner
+
+S3 is used for scalable and durable file storage.
+
+---
+
+# 6. Why Use S3 Instead Of Storing Files On EC2?
+
+### Answer
+
+If files are stored on EC2:
+
+* Storage becomes limited.
+* Files may be lost if the server is terminated.
+* Scaling becomes difficult.
+
+S3 provides:
+
+* High durability
+* Scalability
+* Backup
+* Easy access
+
+### Example
+
+Bad:
+
+```text
+User Upload
+↓
+Store On EC2
+```
+
+Better:
+
+```text
+User Upload
+↓
+Store On S3
+↓
+Store File URL In Database
+```
+
+---
+
+# 7. What Is RDS?
+
+### Answer
+
+RDS (Relational Database Service) is AWS's managed database service.
+
+It supports:
+
+* PostgreSQL
+* MySQL
+* MariaDB
+* SQL Server
+
+### Example
+
+```text
+FastAPI
+↓
+RDS PostgreSQL
+↓
+Store User Data
+```
+
+### Interview One-Liner
+
+RDS is a managed relational database service that handles backups, maintenance, and monitoring automatically.
+
+---
+
+# 8. How Does FastAPI Connect To RDS?
+
+### Answer
+
+FastAPI connects to RDS using the database endpoint provided by AWS.
+
+The endpoint, username, password, and database name are configured in the application's database connection settings.
+
+### Example
+
+```python
+DATABASE_URL = (
+    "postgresql://user:password"
+    "@mydb.abc123.ap-south-1.rds.amazonaws.com:5432/mydb"
+)
+```
+
+### Flow
+
+```text
+FastAPI
+↓
+SQLAlchemy
+↓
+RDS Endpoint
+↓
+PostgreSQL
+```
+
+---
+
+# 9. Why Use RDS Instead Of PostgreSQL On EC2?
+
+### Answer
+
+RDS automatically manages:
+
+* Backups
+* Monitoring
+* Patching
+* Maintenance
+* High Availability
+
+This reduces operational effort.
+
+### Example
+
+Without RDS:
+
+```text
+Install PostgreSQL
+Configure Backups
+Monitor Database
+Handle Failures
+```
+
+With RDS:
+
+```text
+AWS Manages Database
+Developers Use Database
+```
+
+---
+
+# 10. What Is IAM?
+
+### Answer
+
+IAM (Identity and Access Management) controls permissions in AWS.
+
+It determines:
+
+* Who can access resources
+* What actions they can perform
+
+### Example
+
+```text
+Developer
+↓
+Can Access EC2
+
+Intern
+↓
+Cannot Delete Database
+```
+
+### Interview One-Liner
+
+IAM is used to manage users, roles, and permissions for AWS resources.
+
+---
+
+# 11. Explain A Typical AWS Architecture
+
+### Example
+
+```text
+Users
+↓
+Internet
+↓
+Nginx
+↓
+EC2
+↓
+FastAPI
+↓
+RDS PostgreSQL
+
+CSV Uploads
+↓
+S3
+↓
+RabbitMQ Worker
+↓
+Database
+```
+
+---
+
+# 12. How Would You Handle Large CSV Imports?
+
+### Answer
+
+1. User uploads CSV.
+2. File stored in S3.
+3. API creates Job ID.
+4. RabbitMQ queue receives task.
+5. Worker reads file from S3.
+6. Processes records.
+7. Updates status in Redis.
+8. UI polls Job Status API.
+
+### Flow
+
+```text
+CSV Upload
+↓
+S3
+↓
+RabbitMQ
+↓
+Worker
+↓
+Database
+
+Status
+↓
+Redis
+↓
+API
+↓
+UI
+```
+
+---
+
+# 13. Safe AWS Experience Answer
+
+### If Asked:
+
+"What AWS services have you used?"
+
+### Answer
+
+My exposure has mainly been around understanding and supporting deployments involving EC2, S3, RDS, and IAM. My primary focus has been backend development, but I have worked alongside deployment and production support processes and understand how applications are hosted, stored, and accessed in AWS environments.
+
+---
+
+# Most Important AWS Topics For Tomorrow
+
+1. AWS Basics
+2. EC2
+3. SSH Connection
+4. FastAPI Deployment Flow
+5. S3
+6. RDS
+7. IAM
+8. RDS vs PostgreSQL on EC2
+9. S3 vs Local Storage
+10. CSV Processing Architecture (S3 + RabbitMQ + Redis)
+
+These topics are sufficient for most HR and first-round technical discussions for a Python Backend Developer with ~2 years of experience.

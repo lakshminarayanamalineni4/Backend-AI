@@ -1,0 +1,42 @@
+Model:
+
+    A model is a trained brain of a machine learning system.
+
+    - In AI and ML, a model is a mathematical representation that learn patterns from data and use those patterns to make predict 
+
+    Example
+
+    Suppose you want to predict house prices:
+
+        -Collect data (house size, number of bedrooms, location, price).
+        -Train an algorithm on this data.
+        -The result is a model that has learned the relationship between features and prices.
+        -You can then give the model details of a new house, and it predicts the price.
+
+    Components
+
+        - Input features: Information provided to the model (e.g., house size).
+        - Parameters: Values learned during training (e.g., weights in a neural network).
+        - Output: Prediction or decision (e.g., estimated house price).
+
+    Types of ML Models
+
+        - Linear Regression – predicts numerical values.
+        - Logistic Regression – classifies into categories.
+        - Decision Trees – uses rule-based decisions.
+        - Random Forests – combines multiple decision trees.
+        - Neural Networks – inspired by the human brain; used in deep learning.
+        - Support Vector Machines (SVMs) – used for classification and regression.
+
+    AI vs. ML Model
+
+        - AI is the broader field of creating intelligent systems.
+        - ML is a subset of AI that learns from data.
+        - A model is the trained artifact produced by an ML algorithm and used to perform tasks.
+
+    Analogy:
+
+        - Data = study material
+        - Training algorithm = learning process
+        - Model = student after learning
+        - Prediction = answer given by the student on a new question.

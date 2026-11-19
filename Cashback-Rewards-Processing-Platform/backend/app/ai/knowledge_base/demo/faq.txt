@@ -1,0 +1,29 @@
+# FAQ — BigCity Cashback
+
+Document: faq.txt
+Audience: SUPPORT
+Purpose: Short answers for common customer questions
+
+Q: When will I receive my cashback?
+A: Base cashback is credited within 48 hours after transaction settlement.
+
+Q: What is the maximum cashback per transaction?
+A: The maximum cashback amount is ₹500 per transaction.
+
+Q: Are refunded transactions eligible for cashback?
+A: No. Refunded or cancelled transactions are not eligible for cashback.
+
+Q: Why didn’t I get my money back / cashback?
+A: Common reasons: transaction not settled yet; transaction refunded or cancelled; purchase not eligible; ₹500 per-transaction cap already reached for that purchase; campaign or referral conditions not met. Support should check settlement and refund status.
+
+Q: How does the referral program work?
+A: Customers receive ₹100 for every successful referral that completes an eligible purchase.
+
+Q: Is Festival Bonanza cashback available on refunded purchases?
+A: No. Festival Bonanza follows the same rule: refunded or cancelled transactions are not eligible.
+
+Q: How long does Festival Bonanza bonus cashback take?
+A: Festival Bonanza bonus cashback is credited within 72 hours after transaction settlement (campaign timing differs from the base 48-hour policy).
+
+Q: What should Support do if policy documents disagree on credit timing?
+A: State both sources, explain the difference (base policy vs campaign), and do not invent a third timeline.

@@ -1,0 +1,32 @@
+INTRODUCTION:
+
+Hi, I'm Lakshmi Narayana Malineni, and I'm a Backend Developer with 2+ years of experience at BigCity Promotions, which is a product-based company focused on loyalty, rewards, cashback, and engagement platforms.
+
+During my time at BigCity, I've worked on multiple backend systems including user Management platforms, cashback and rewards redemption systems, QR-code based redemption solutions, reporting frameworks, and hierarchy management platforms.
+
+My primary experience is with Python, FastAPI, Flask, PostgreSQL, RabbitMQ, Redis, REST APIs, and backend system development. I've also worked with PHP and the Yii framework since some of our existing products were built on that stack.
+
+My responsibilities include API development, database design, asynchronous processing, authentication and authorization, deployment support, production issue resolution, and collaborating closely with QA, business, and product teams to deliver new features.
+
+Recently, I've been looking for opportunities where I can work more deeply on Python backend development, FastAPI, scalable systems, and cloud technologies, which is why I'm excited about this opportunity.
+
+
+10. Why Do You Want To Join Us?
+
+I enjoy working on backend systems that are used by real users and solve real business problems.
+
+From what I understand, your product involves building scalable APIs, handling enrolments, payments, scheduling, and other core platform workflows.
+
+That aligns closely with the type of work I want to do.
+
+I also see this as an opportunity to deepen my expertise in FastAPI, cloud technologies, and product engineering while contributing to a growing platform.
+
+11. Why Should We Hire You?
+
+I bring hands-on experience from a product-based environment where I have worked on multiple backend systems used by real users.
+
+I am comfortable with Python, REST APIs, PostgreSQL, RabbitMQ, Redis, backend architecture, and production support.
+
+I have experience collaborating across development, QA, and business teams and understand the importance of delivering stable features rather than just completing tasks.
+
+I am also continuously improving my skills in FastAPI and cloud technologies, and I believe I can quickly contribute and grow within your team.

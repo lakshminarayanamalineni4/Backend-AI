@@ -1,0 +1,596 @@
+# FastAPI Interview Quick Revision Sheet
+
+## 1. FastAPI Instance
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+```
+
+Creates the FastAPI application.
+
+---
+
+# 2. HTTP Methods
+
+```python
+@app.get("/users")
+```
+
+Fetch data.
+
+```python
+@app.post("/users")
+```
+
+Create data.
+
+```python
+@app.put("/users/{id}")
+```
+
+Update data.
+
+```python
+@app.delete("/users/{id}")
+```
+
+Delete data.
+
+---
+
+# 3. Pydantic Models
+
+```python
+from pydantic import BaseModel, EmailStr
+
+class UserCreate(BaseModel):
+    name: str
+    email: EmailStr
+    age: int
+```
+
+Purpose:
+
+* Request validation
+* Type checking
+* Schema generation
+
+Benefits:
+
+* No manual validation
+* Automatic error responses
+
+---
+
+# 4. Request Body
+
+```python
+@app.post("/users")
+def create_user(user: UserCreate):
+    return user
+```
+
+Request:
+
+```json
+{
+    "name":"Lakshmi",
+    "email":"abc@gmail.com",
+    "age":25
+}
+```
+
+Used for:
+
+* Create APIs
+* Update APIs
+* Login APIs
+
+---
+
+# 5. Query Parameters
+
+```python
+@app.get("/users")
+def get_users(page: int = 1):
+    return page
+```
+
+Request:
+
+```
+/users?page=1
+```
+
+Used for:
+
+* Pagination
+* Search
+* Filtering
+
+Examples:
+
+```
+/users?page=1&limit=10
+/products?category=mobile
+```
+
+---
+
+# 6. Path Parameters
+
+```python
+@app.get("/users/{user_id}")
+def get_user(user_id: int):
+    return user_id
+```
+
+Request:
+
+```
+/users/10
+```
+
+Used for:
+
+* Specific resources
+* IDs
+
+---
+
+# 7. Dependency Injection
+
+```python
+from fastapi import Depends
+
+def get_db():
+    db = SessionLocal()
+
+    try:
+        yield db
+
+    finally:
+        db.close()
+```
+
+Usage:
+
+```python
+@app.get("/users")
+def get_users(
+    db=Depends(get_db)
+):
+    pass
+```
+
+Purpose:
+
+* Reusability
+* Cleaner code
+* Testability
+
+Common Uses:
+
+* Database sessions
+* Authentication
+* Configurations
+
+---
+
+# 8. Database Connection
+
+```python
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+DATABASE_URL = "postgresql://user:password@localhost/db"
+
+engine = create_engine(DATABASE_URL)
+
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
+```
+
+Flow:
+
+```
+Engine
+↓
+SessionLocal
+↓
+get_db()
+↓
+API
+```
+
+---
+
+# 9. SQLAlchemy Queries
+
+Fetch All:
+
+```python
+db.query(User).all()
+```
+
+Equivalent SQL:
+
+```sql
+SELECT * FROM users;
+```
+
+Fetch One:
+
+```python
+db.query(User).filter(
+    User.email == email
+).first()
+```
+
+Equivalent SQL:
+
+```sql
+SELECT * FROM users
+WHERE email = ?
+LIMIT 1;
+```
+
+Insert:
+
+```python
+db.add(user)
+db.commit()
+```
+
+Update:
+
+```python
+db.commit()
+```
+
+Delete:
+
+```python
+db.delete(user)
+db.commit()
+```
+
+---
+
+# 10. JWT Authentication
+
+Login Flow:
+
+```
+Email + Password
+↓
+Validate Request
+↓
+Fetch User
+↓
+Verify Password
+↓
+Generate JWT
+↓
+Return Token
+```
+
+JWT Payload:
+
+```python
+{
+    "user_id":1,
+    "role":"admin"
+}
+```
+
+Protected Route:
+
+```python
+current_user = Depends(
+    get_current_user
+)
+```
+
+Authorization Header:
+
+```
+Bearer eyJhbGc...
+```
+
+JWT = Stateless Authentication
+
+---
+
+# 11. Password Hashing
+
+Hash Password:
+
+```python
+bcrypt.hashpw(
+    password.encode(),
+    bcrypt.gensalt()
+)
+```
+
+Verify Password:
+
+```python
+bcrypt.checkpw(
+    entered_password.encode(),
+    stored_password
+)
+```
+
+Important:
+
+* Passwords are hashed
+* Not encrypted
+
+---
+
+# 12. Response Models
+
+```python
+class UserResponse(BaseModel):
+    id: int
+    name: str
+```
+
+```python
+@app.get(
+    "/users/{id}",
+    response_model=UserResponse
+)
+```
+
+Purpose:
+
+* Hide sensitive fields
+* Standardize output
+* Validate response
+
+---
+
+# 13. Async vs Sync
+
+Sync:
+
+```python
+def get_users():
+```
+
+Async:
+
+```python
+async def get_users():
+```
+
+Use Async For:
+
+* API calls
+* Database calls
+* File operations
+* Network operations
+
+Avoid Async For:
+
+* Heavy CPU calculations
+* Image processing
+* Video processing
+
+Interview Answer:
+
+Async allows the application to handle other requests while waiting for I/O operations to complete.
+
+---
+
+# 14. Middleware
+
+```python
+@app.middleware("http")
+async def middleware(
+    request,
+    call_next
+):
+    response = await call_next(request)
+    return response
+```
+
+Runs before and after every request.
+
+Uses:
+
+* Logging
+* Authentication
+* Request timing
+* Monitoring
+
+---
+
+# 15. Background Tasks
+
+```python
+from fastapi import BackgroundTasks
+
+background_tasks.add_task(
+    send_email
+)
+```
+
+Uses:
+
+* Emails
+* Notifications
+* Logging
+
+Difference:
+
+Background Tasks:
+
+* Same application
+* Lightweight
+
+RabbitMQ:
+
+* Separate workers
+* Distributed
+* Reliable
+
+---
+
+# 16. WebSockets
+
+```python
+@app.websocket("/ws")
+async def websocket_endpoint(
+    websocket: WebSocket
+):
+    await websocket.accept()
+```
+
+Uses:
+
+* Chat
+* Notifications
+* Live updates
+* Tracking
+
+Difference:
+
+HTTP:
+
+```
+Request
+↓
+Response
+```
+
+WebSocket:
+
+```
+Persistent Connection
+```
+
+---
+
+# 17. Startup / Shutdown Events
+
+Startup:
+
+```python
+@app.on_event("startup")
+async def startup():
+    pass
+```
+
+Shutdown:
+
+```python
+@app.on_event("shutdown")
+async def shutdown():
+    pass
+```
+
+Uses:
+
+* DB initialization
+* Cache loading
+* Cleanup
+
+---
+
+# 18. Swagger Docs
+
+Swagger:
+
+```
+/docs
+```
+
+ReDoc:
+
+```
+/redoc
+```
+
+Benefits:
+
+* API testing
+* API documentation
+* Request schema visualization
+* Response schema visualization
+
+---
+
+# 19. Common Interview Flow Questions
+
+User Registration:
+
+```
+Request
+↓
+Pydantic Validation
+↓
+Dependency Injection
+↓
+DB Validation
+↓
+Save User
+↓
+Response Model
+↓
+Response
+```
+
+Login:
+
+```
+Email + Password
+↓
+Pydantic Validation
+↓
+Fetch User
+↓
+Verify Password
+↓
+Generate JWT
+↓
+Return Token
+```
+
+Protected API:
+
+```
+Bearer Token
+↓
+Validate JWT
+↓
+Extract User
+↓
+Authorize User
+↓
+Return Data
+```
+
+---
+
+# Most Important Topics For Tomorrow
+
+1. Pydantic
+2. Request Body vs Query Params
+3. Path Params
+4. Dependency Injection
+5. Database Sessions
+6. JWT Authentication
+7. Password Hashing
+8. Response Models
+9. Async vs Sync
+10. Middleware
+11. Swagger Docs
+12. RabbitMQ vs Background Tasks

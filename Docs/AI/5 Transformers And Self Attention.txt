@@ -1,0 +1,20 @@
+TRANSFORMER:
+
+    A Transformer is a neural network architecture that uses Self-Attention to understand relationship between words and process entire sequences(like words and sentences) in parallel.
+
+    - It is the core technology behind modern LLMs such as ChatGPT, GPT, and Llama, enabling them to understand context, generate text, translate languages, summarize documents, and perform many other AI tasks.
+
+
+Self Attention:
+
+    a mechanism where each token looks at other tokens in the same sequence to decide which ones are important for understanding its meaning.
+
+    Consider:
+
+    - The animal didn't cross the street because it was tired.
+
+        To understand "it", the model should focus on:
+
+        animal
+
+    Self-attention learns these relationships by assigning higher attention scores to relevant words.

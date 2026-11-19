@@ -1,0 +1,15 @@
+.venv/
+
+# Environment files (real secrets must never be committed)
+.env
+*.env
+,env
+.env.*
+!.env.example
+
+# Plaintext API key files
+docs/*api_key*.txt
+
+__pycache__/
+*.pyc
+.pytest_cache/

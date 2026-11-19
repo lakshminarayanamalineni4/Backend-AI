@@ -1,0 +1,44 @@
+LLM:
+    LLM stands for large language models
+
+    DEF:
+        An LLM is an AI Model trained on very large amounts of text data so it can understand, generate, summarize, translate, and answer questions in human language.
+
+    LARGE       - Trained using large datasets.
+    LANGUAGE    - understands Human Languages.
+    MODELS      - A Mathematical System that learns Patterns from data.
+
+    An LLM does not memorize every sentence. It learns statistical patterns and relationships between words, ideas, syntax, and concepts. During use, it predicts what token (small text unit) should come next based on context.
+
+    Typical workflow:
+
+        - Collect huge text datasets (books, websites, articles, code, etc.)
+        - Train a neural network (commonly a Transformer architecture)
+        - Learn language patterns
+        - Use the trained model to generate responses
+
+    Examples of the concept:
+
+        Some examples of LLMs:
+
+            GPT → Used in ChatGPT
+            Llama
+            Gemma
+            Phi
+            DeepSeek
+
+    Simple analogy:
+
+    Traditional calculator  → performs fixed calculations
+    AI model                → learns patterns
+    LLM                     → learns language patterns specifically
+
+    So:
+        
+        AI ⊃ AI Models ⊃ LLMs
+
+    Meaning:
+
+        Artificial Intelligence
+            └── AI Models
+                └── Large Language Models (LLMs)

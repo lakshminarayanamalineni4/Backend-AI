@@ -1,0 +1,117 @@
+ARTIFICIAL INTELLIGENCE:
+    Artificial Intelligence (AI) is the development of computer Systems capable of performing tasks that requires human intelligence such as learning, reasoning, problem-solving, decision making..
+
+
+MACHINE LEARNING:
+    Machine Learning (ML) is a subset of AI that enables computers to learn from data and improve performance without being explicitly programmed for every rule.
+
+
+Explanation of the Concepts:
+
+    Artificial Intelligence (AI)
+
+        AI is the overall goal of making machines behave intelligently.
+
+        Examples:
+
+            - Chatbots
+            - Self-driving cars
+            - Face recognition systems
+            - Recommendation systems
+            - Voice assistants
+
+        AI systems can be built using:
+
+            - Rule-based programming
+            - Machine Learning
+            - Deep Learning
+            - Expert Systems
+            - Machine Learning (ML)
+
+
+    ML is one way to achieve AI.
+
+        Instead of writing every rule manually:
+
+            if marks > 40:
+                result = "Pass"
+            else:
+                result = "Fail"
+
+        In ML, we provide data:
+
+            Marks  Result
+            85     Pass
+            75     Pass
+            20     Fail
+            35     Fail
+
+        The model learns the pattern itself and can predict results for new data.
+
+
+Relationship Between AI and ML:
+
+    Artificial Intelligence (AI)
+    │
+    ├── Rule-Based Systems
+    │
+    ├── Expert Systems
+    │
+    └── Machine Learning (ML)
+        │
+        └── Deep Learning (DL)
+                │
+                └── Large Language Models (LLMs)
+
+    So:
+
+        AI > ML > Deep Learning > LLMs
+
+
+Examples of the Concepts
+
+    Example 1: Spam Email Detection
+
+        AI Goal
+
+            Identify spam emails automatically.
+
+        ML Solution
+
+            Train a model using thousands of spam and non-spam emails.
+            The model learns patterns and classifies new emails.
+            
+    Example 2: Netflix Recommendations
+
+        AI Goal
+
+            Recommend movies users may like.
+
+        ML Solution
+
+            Analyze watch history and user behavior.
+            Predict which movies a user is likely to enjoy.
+
+    Example 3: ChatGPT
+
+        AI Goal
+
+            Communicate with humans naturally.
+
+        ML/Deep Learning Solution
+
+        Train a Large Language Model on massive text datasets.
+        Generate human-like responses.
+
+
+Quick Comparison:
+
+Feature	                AI	                            ML
+
+Full Form	        Artificial Intelligence	        Machine Learning
+Scope	               Broad field	                    Subset of AI
+Goal	            Make machines intelligent	    Learn from data
+Requires Data?	         Not always	                        Yes
+Uses Rules?	        Can use rules or learning	    Learns patterns from data
+Example	            Chess engine, robot	            Spam detector, recommendation 
+                                                                    system

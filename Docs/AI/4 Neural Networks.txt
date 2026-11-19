@@ -1,0 +1,57 @@
+Neural Network:
+
+    A Neural Network is a machine learning model inspired by the way biologcal neurons are connected in the brain. 
+
+    - It learns patterns from data by adjusting numerical Parameters called weights.
+    
+
+    A neural network typically consists of:
+
+        - Input Layer – Receives the data (e.g., pixels of an image, words in a sentence).
+        - Hidden Layers – Process the data through interconnected neurons.
+        - Output Layer – Produces the final prediction or decision.
+
+        Each neuron:
+
+            - Receives inputs.
+            - Multiplies them by weights.
+            - Adds a bias.
+            - Applies an activation function.
+            - Passes the result to the next layer.
+
+    
+
+    Simple Example
+
+        Suppose a neural network is trained to distinguish cats from dogs:
+
+            - Input: image pixels
+            - Hidden layers: learn features such as edges, ears, and fur patterns
+            - Output: probability of "cat" or "dog"
+
+        After seeing thousands of examples, the network learns to recognize these patterns automatically.
+
+
+    
+
+    Types of Neural Networks
+
+        - Feedforward Neural Networks (FNNs)        – Basic architecture.
+        - Convolutional Neural Networks (CNNs)      – Excellent for images and computer vision.
+        - Recurrent Neural Networks (RNNs)          – Designed for sequences and time-series data.
+        - Long Short-Term Memory (LSTM) Networks    – Improved RNNs for long-term dependencies.
+        - Transformers                              – Modern architecture used in large language models such as ChatGPT.
+
+
+
+    Applications
+
+        Neural networks are used for:
+
+            - Image recognition
+            - Speech recognition
+            - Language translation
+            - Recommendation systems
+            - Medical diagnosis
+            - Autonomous vehicles
+            - Financial forecasting

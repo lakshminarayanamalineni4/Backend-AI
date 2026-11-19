@@ -1,0 +1,39 @@
+# Rewards Policy — BigCity Cashback
+
+Document: rewards_policy.txt
+Audience: SUPPORT, CAMPAIGN_OPERATIONS
+Purpose: Base cashback rules for eligible purchases
+
+## Tier cashback rates
+
+- Gold customers receive 10% cashback on eligible purchases.
+- Silver customers receive 5% cashback on eligible purchases.
+- Bronze customers receive 2% cashback on eligible purchases.
+
+## Caps and credit timing
+
+- The maximum cashback per transaction is ₹500.
+- Base cashback is credited within 48 hours after successful transaction settlement.
+- Only settled, non-refunded, non-cancelled transactions are eligible.
+
+## Eligibility exclusions
+
+- Transactions that are refunded or cancelled are not eligible for cashback rewards.
+- Pending or unsettled transactions do not receive cashback until settlement completes.
+- Purchases that fall outside active campaign rules do not receive campaign bonus cashback (base tier cashback may still apply if otherwise eligible).
+
+## Common reasons cashback was not credited
+
+Use this section when a customer asks why they did not receive cashback or "money back":
+
+1. The transaction is not yet settled (cashback waits until settlement).
+2. The transaction was refunded or cancelled (not eligible).
+3. The cashback amount would exceed the ₹500 per-transaction maximum (amount is capped).
+4. The customer tier rate does not apply to that purchase category (not an eligible purchase).
+5. Campaign bonus conditions were not met (see campaigns.txt).
+6. Referral reward conditions were not met (referred user must complete an eligible transaction).
+
+## Policy note for investigators
+
+Support should confirm transaction settlement status and refund status before promising a credit.
+Do not invent cashback amounts. Use tier %, campaign rules, and the ₹500 cap from this policy.

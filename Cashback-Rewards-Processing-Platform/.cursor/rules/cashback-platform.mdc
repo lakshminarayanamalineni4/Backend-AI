@@ -1,0 +1,41 @@
+---
+description: BigCity AI Operations & Knowledge Intelligence Platform — frozen architecture and working rules
+alwaysApply: true
+---
+
+# BigCity AI Operations & Knowledge Intelligence Platform
+
+## Source of truth
+- Architecture & rules: `docs/AI_AGENT_CONTEXT.md`
+- Progress / next step: `docs/PROJECT_PROGRESS.md`
+
+## Goal
+Internal AI platform for BigCity Promotions (consumer cashback + campaign operations). Combines PostgreSQL structured data, S3 documents, ChromaDB retrieval, hybrid search, reranking, LangGraph, and grounded LLM answers.
+
+## Frozen roles (exact)
+`ADMIN` | `CAMPAIGN_OPERATIONS` | `SUPPORT` | `ENGINEER`
+
+## Frozen entities (order)
+1. Role → User
+2. Document → DocumentVersion → IngestionJob
+3. Campaign → CampaignRule
+4. Customer → Transaction → Reward
+5. Production RAG → LangGraph → LLMOps → Deployment
+
+## Out of scope
+Do **not** introduce: Department, KnowledgeCategory, DocumentAccess, DocumentEmbedding, DocumentChunk, ProcessingJob, ChatSession, ChatMessage, Feedback, or alternate role sets (EMPLOYEE, SUPER_ADMIN, etc.).
+
+## Stack
+- **Backend:** Python 3.12, FastAPI, PostgreSQL, SQLAlchemy 2.x, Alembic, Pydantic v2, JWT/RBAC (after User)
+- **AI:** Gemini 2.5 Flash, sentence-transformers (prototype OK), ChromaDB (production target), LangGraph later
+- **Infra later:** Docker Compose, Redis, S3, RDS, ECS/EC2, GitHub Actions
+
+## Working rules
+- Preserve working code; evolve, do not restart
+- One step at a time; teach-first; wait for user confirmation before marking progress done
+- Entity lifecycle: Model → Migration → Schemas → Repository → Service → Exceptions → CRUD → Tests → Logging → Seed/Docs
+- Repositories stay at `app/repositories` unless explicitly approved to move
+- Prototype RAG under `app/ai/rag/` is reference only — do not delete; do not treat as production architecture
+
+## Immediate focus
+User CRUD lifecycle complete. Next: Authentication (JWT) → Authorization → RBAC.
